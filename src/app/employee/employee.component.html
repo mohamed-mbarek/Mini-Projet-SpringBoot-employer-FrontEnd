@@ -23,7 +23,7 @@
                </div>
                <div class="col-15 card-title align-self-center mb-0">
                   <h5>{{employee?.name}}</h5>
-                  <!-- <h6 class="m-0" id="DEP">{{employee?.dep.nameDep}}</h6> -->
+                  <h6 class="m-0" id="DEP">{{employee?.dep.nameDep}}</h6> 
                   <p class="m-0" id="job">{{employee?.jobTitle}}</p>
 
                </div>
@@ -73,6 +73,16 @@
                  <option         *ngFor="let dep of departements">{{dep.nameDep}}</option>
                </select>
              </div>  -->
+
+             <select id="inputState" class="form-control" name="departement" [(ngModel)]="dep" required>
+               <option [ngValue]="dep.id" *ngFor="let dep of departements">
+                   {{dep.nameDep}}
+               </option>
+           </select> 
+
+
+
+
             <div class="form-group">
                <label for="phone">Job title</label>
                <input type="text" ngModel name="jobTitle" class="form-control" id="jobTile" placeholder="Job title" required>

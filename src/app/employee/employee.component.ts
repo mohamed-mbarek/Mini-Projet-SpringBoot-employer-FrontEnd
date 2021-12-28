@@ -15,6 +15,7 @@ export class EmployeeComponent implements OnInit {
   public  employees:Employee[] ;
   public editEmployee:Employee;
   public deleteEmployee:Employee;
+  public dep:Departement
   public  departements:Departement[] ;
   constructor( private employeeService:EmployeeService ,private departementService:DepartementService){};
   
@@ -72,7 +73,22 @@ export class EmployeeComponent implements OnInit {
   public onAddEmployee(addForm:NgForm):void{
     document.getElementById('add-employee-form').click();
     console.log(addForm.value)
-    this.employeeService.addEmployee(addForm.value).subscribe(
+    const values = addForm.value;
+    let emp: Employee = {
+      name: values.name,
+      email: values.email,
+      jobTitle: values.jobTitle,
+      phone: values.phone,
+      imageUrl: values.imageUrl,
+      employeeCode :values.phone,
+      dateEmbauche :values.dateEmbauche,
+      dep: {
+        id: values.departement
+      }
+    };
+   
+    console.log(emp);
+    this.employeeService.addEmployee(emp).subscribe(
       (responce:Employee)=>{
         console.log(responce);
         this.getEmployees;
@@ -118,8 +134,8 @@ export class EmployeeComponent implements OnInit {
   }
 public getListDepartement() :void{
   this.departementService.getDepartements().subscribe(
-    (reponse:Departement[])=>{
-      this.departements=reponse;
+    (response:Departement[])=>{
+      this.departements=response;
     },
     (error:HttpErrorResponse)=>{
       alert(error.message);
